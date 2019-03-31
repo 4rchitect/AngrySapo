@@ -15,6 +15,9 @@ public class PlayerInput : MonoBehaviour
 
     private float myAngle = 0.0f;
 
+    bool onJump = false;
+    bool onFall = false;
+
     void Awake()
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
@@ -32,6 +35,14 @@ public class PlayerInput : MonoBehaviour
 		if (clicked)
         {
             endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+
+        if(myRigidbody2D.velocity.x > .2f){
+            GetComponent<Animator>().SetTrigger("OnJump");
+        }
+        if(myRigidbody2D.velocity.x < .2f)
+        {
+            GetComponent<Animator>().SetTrigger("OnFall");
         }
 	}
 
